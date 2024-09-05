@@ -1,0 +1,299 @@
+\documentclass[11pt]{article}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancybox}
+
+\hypersetup{hidelinks}
+
+%%%%%%%%%%%%%%%%%%%%
+% 设置
+%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\parindent}{0pt}					% 取消全局段落缩进
+\pagenumbering{gobble}						% 取消页码显示
+\setlist[itemize]{nosep                     % 取消 itemize 的默认间距
+    , before={\vspace*{-\parskip}}          % 取消 itemize 和后续段落之间的空白
+    , leftmargin=*}		                    % 取消 itemize 的左边距
+\setlist[enumerate]{leftmargin=*}	        % 取消 enumerate 的左边距
+\renewcommand{\arraystretch}{1.2}           % 设置表格行间距
+\linespread{1.2}                           % 设置正文行间距
+
+\titleformat{\section}					    % 将原标题前面的数字取消了
+  {\Large\bfseries\raggedright} 		      % 字体改为 Large，bold，左对齐
+  {}{0em}                      			  % 可用于添加全局标题前缀
+  {}                           			  % 可用于添加代码
+  [{\color{secondary_color}\titlerule}]     % 标题下方加一条线
+\titlespacing*{\section}{0cm}{*1.2}{*1.2}	% 标题左边留白，上方，下方
+
+\usepackage[
+	a4paper,
+	left=1.2cm,
+	right=1.2cm,
+	top=1.5cm,
+	bottom=1cm,
+	nohead
+]{geometry}                                 % 页面边距设置
+
+% 字体设置
+\setmainfont[
+    Path=fonts/,
+    Extension=.otf,
+    BoldFont=*-Bold,
+]{NotoSerifSC}
+
+% 自定义颜色（参考 https://vi.tsinghua.edu.cn/gk/xxbz/scgf.htm）
+\definecolor{primary_color}{RGB}{102, 8, 116}    
+\definecolor{secondary_color}{RGB}{102, 8, 116}
+
+\newlength{\iconwidth}
+\setlength{\iconwidth}{1.5em}                   % 设置 section 标题部分图标占用的宽度
+
+%%%%%%%%%%%%%%%%%%%%
+% 文章内容
+%%%%%%%%%%%%%%%%%%%%
+
+% 学院
+\newcommand{\school}{自动化学院 | School of Automation} 
+
+% 联系方式
+\newcommand{\contact}{
+    % 根据个人喜好选择字号
+    % \small                % 小
+    \footnotesize           % 更小
+    % \scriptsize           % 再小一号
+    \textcolor{white}{
+        % 邮箱
+        \faEnvelope \quad \href{mailto:youremail@seu.edu.cn}{youremail@seu.edu.com}
+        \hspace{4em}
+        % 手机号
+        \faPhone \quad  130-6666-0000
+        % 别的联系方式，如微信、GitHub等
+        \hspace{4em}
+        \faGithub \quad \href{https://github.com/Exception0x0194/SEU-CV}{GitHub 项目地址}
+    }
+}
+
+\begin{document}
+
+    %%%%%%%%%%%%%%%%%%%%
+    % 页眉、页脚和背景（如果有多页简历，请把页眉页脚和背景复制粘贴到第二页的内容之前）
+    %%%%%%%%%%%%%%%%%%%%
+
+    % 页眉：校标组合+学院名
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north, inner sep=0pt](header) at (current page.north){
+            \includegraphics[width=\paperwidth]{images/header-purple.png}
+        };
+        \node[anchor=west](school_logo) at (header.west){
+            \hspace{0.5cm}
+            \includegraphics[width=0.2\textwidth]{images/logo-banner-white.png}
+        };
+        \node[anchor=east](school_name) at(header.east){
+            \textcolor{white}{\textbf{\school}}
+            \hspace{0.5cm}
+        };
+    \end{tikzpicture}
+    \vspace{-3.5em}
+
+    % 页脚，联系方式
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=south, inner sep=0pt](footer) at (current page.south){
+            \includegraphics[width=\paperwidth]{images/footer-purple.png}
+        };
+        % 联系方式
+        \node[anchor=center] at(footer.center){\contact};
+    \end{tikzpicture}
+
+    % 背景
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[opacity=0.05] at(current page.center){
+            \includegraphics[width=0.7\paperwidth, keepaspectratio]{images/logo.png}
+        };
+    \end{tikzpicture}
+
+    %%%%%%%%%%%%%%%%%%%%
+    % 简历正文
+    %%%%%%%%%%%%%%%%%%%%
+
+    \begin{minipage}[t]{0.78\textwidth}
+        % 个人信息
+        % \faGraduationCap这类\fa开头的都是font awesome里的logo，想换成其他logo的话，可以看一下附带的fontawsome.pdf，自行替换。
+        \begin{minipage}[t]{\textwidth}
+        \section[个人信息]{\makebox[\iconwidth][c]{\color{primary_color}{\faAddressCard}}\quad 个人信息}
+        \begin{minipage}[t]{0.5\textwidth}
+            \textbf{姓\qquad 名}：你的名字
+            
+            \textbf{出生年月}：你的出生日期
+        \end{minipage}
+        \begin{minipage}[t]{0.35\textwidth}
+            \textbf{性\qquad 别}：沃尔玛购物袋
+            
+            \textbf{政治面貌}：你的政治面貌
+        \end{minipage}
+        \vspace{1.2em}
+        \end{minipage}
+
+        % 教育背景
+        \begin{minipage}[t]{\textwidth}
+        \section[教育背景]{\makebox[\iconwidth][c]{\color{primary_color}{\faGraduationCap}}\quad 教育背景}
+        
+        {\large \textbf{清华大学}}，专科 \hfill 2000年9月--2010年6月
+        \begin{itemize}
+            \item 你的学院，你的专业
+            \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
+        \end{itemize}
+        
+        \vspace{0.5em}
+        {\large \textbf{清华大学}}，本科 \hfill 2010年9月--2020年6月
+        \begin{itemize}
+            \item 你的学院，你的专业
+            \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
+            \item \textbf{GPA}：4.8 / 4.8（排名：1 / 250）
+        \end{itemize}
+        
+        \vspace{0.5em}
+        {\large \textbf{清华大学}}，硕士 \hfill 2020年9月--至今
+        \begin{itemize}
+            \item 你的学院，你的专业，你的导师姓名\ 职称
+            \item \textbf{研究方向}：方向1、方向2、方向3、方向4\ 等。
+        \end{itemize}
+        
+        \vspace{1.2em}
+        \end{minipage}
+    \end{minipage}
+    \hfill
+    % 右半边，照片，比例占行宽20%
+    \begin{minipage}[t]{0.2\textwidth}
+        \vspace{2em} % 照片上侧内容
+        \setlength{\fboxsep}{0pt}
+        \doublebox{\includegraphics[width=\linewidth]{images/avatar.png}}
+    \end{minipage}
+
+    \begin{minipage}[t]{\textwidth}
+    % 科研成果
+    \section[科研成果]{\makebox[\iconwidth][c]{\color{primary_color}{\faAtom}}\quad 科研成果}
+
+    % 科研著作（研究生）
+    This is One of Your Paper Published in Conference A.
+    \begin{itemize}
+        \item \textbf{Mingzi Nide}, Daoshi Nide. \hfill 发表于 \textbf{Conference A}（CCF-A类会议）
+        \item 用一句话描述这份论文干了什么\dots\dots
+    \end{itemize}
+
+    \vspace{0.5em}
+    《另一份论文的标题》
+    \begin{itemize}
+        \item  \textbf{你的名字}、你的师兄、你的导师 \hfill 发表于 \textbf{某篇期刊} （SCI-1区）
+        \item 用一句话描述这份论文干了什么\dots\dots
+    \end{itemize}
+    
+    \vspace{1.2em}
+    \end{minipage}
+
+    \begin{minipage}[t]{\textwidth}
+    % 项目经历\科研经历\项目与教学（标题请根据需要修改）
+    \section[项目与教学]{\makebox[\iconwidth][c]{\color{primary_color}{\faChalkboardTeacher}}\quad 项目与教学}
+    
+    {\large \textbf{项目名称}} \hfill 2020年9月--2021年9月
+    \begin{itemize}
+        \item \textbf{你在项目中扮演的角色} \hfill 横向/纵向项目-已完结/进行中
+        \item 用一句话介绍你在这个项目中做了什么\dots\dots
+    \end{itemize}
+
+    \vspace{0.5em}
+    {\large \textbf{某某主题讨论班}}，主讲 / 参与 \hfill 2020年夏季
+    \begin{itemize}
+        \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
+    \end{itemize}
+
+    \vspace{0.5em}
+    {\large \textbf{课程名称}}，助教 \hfill 2021年夏季
+    \begin{itemize}
+        \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
+    \end{itemize}
+    
+    \vspace{1.2em}
+    \end{minipage}
+    
+    % 如果每行的内容不是很多，可以考虑使用 minipage，将内容分列展示
+    \begin{minipage}[t]{0.6\textwidth}
+        \section[技能特长]{\makebox[\iconwidth][c]{\color{primary_color}{\faWrench}}\quad 技能特长}
+        \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+            \item 熟练使用 Python、Jvav、Rust 等编程语言。
+            \item 熟练使用 Tensorflow、Pytorch 等深度学习框架。
+            \item 熟悉 Windows 与 Linux 端开发。
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.35\textwidth}
+        \section[兴趣爱好]{\makebox[\iconwidth][c]{\color{primary_color}{\faStar}}\quad 兴趣爱好}
+        \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+            \item 我喜欢唱
+            \item 跳
+            \item Rap
+            \item 篮球
+        \end{itemize}
+    \end{minipage}
+    
+    % \newpage
+    % % 如有需要，可以添加额外的页面。不要忘记添加页眉页脚和背景相关的代码。
+
+    % % 竞赛经历
+    % \section{\makebox[\widthof{\faTrophy}][c]{\color{primary_color}{\faTrophy}}\quad 竞赛经历}
+    % \begin{table}[h!]
+    %     \begin{tabularx}{\textwidth}{Xp{\widthof{第零负责人}}p{\widthof{国家级-第100名}}p{\widthof{2030年13月}}}
+    %         \textbf{比赛1} & 第一负责人 & 国家级-第10名 & 2023年4月 \\
+    %         \textbf{比赛2} & 个人参赛 & 国家级-一等奖 & 2023年8月\\
+    %         \textbf{比赛3} & 个人参赛 & 省级-一等奖 & 2022年12月\\
+    %         % 同理，可以自己加
+    %     \end{tabularx}
+    % \end{table}
+
+    % % 技能特长
+    % \section{\makebox[\widthof{\faWrench}][c]{\color{primary_color}{\faWrench}}\quad 技能特长}
+    % \begin{itemize}
+    %     \item 熟练使用\Cpp 、Python、Matlab编程语言。
+    %     \item 熟悉Windows与Linux端开发。
+    %     \item 熟练使用Tensorflow，Pytorch等深度学习框架。
+    %     \item 熟练掌握\Cpp 与Python环境下OpenCV与Qt应用的开发，且熟练使用Qt Creator软件。
+    %     \item 熟练使用Altium Designer与LCEDA进行封装绘制与板子设计。
+    %     \item 熟练使用Keil，Arduino IDE等集成开发软件。
+    %     \item 了解模式识别，强化学习，遗传算法，知识蒸馏等相关概念。
+    % \end{itemize}
+
+    % % 所获荣誉
+    % \section{\makebox[\widthof{\faStar}][c]{\color{primary_color}{\faStar}}\quad 所获荣誉}
+    % \begin{multicols}{2}
+    %     \begin{itemize}
+    %         \item 某年学业先进个人
+    %         \item 某年某奖学金某等奖
+    %         \item 某大使
+    %         \item 某年某奖学金某等奖
+    %         \item 某年优秀团员称号
+    %         \item 某年某称号
+    %     \end{itemize}
+    % \end{multicols}
+
+    % % 其他
+    % \section{\makebox[\widthof{\faInfo}][c]{\color{primary_color}{\faInfo}}\quad 其他}
+    % \begin{itemize}
+    %     \item 英语水平-CET6级xxx分
+    %     \item 计算机几级证书
+    %     \item xx几级证书
+    %     \item 技术博客: 某网址
+    %     \item 教师资格证：xxx
+    %     \item 普通话证书：几级几等
+    %     \item 文字排版：\LaTeX
+    % \end{itemize}
+
+\end{document}
