@@ -10,7 +10,7 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{fancybox}
-
+\usepackage{xeCJK}
 \hypersetup{hidelinks}
 
 %%%%%%%%%%%%%%%%%%%%
@@ -19,12 +19,15 @@
 
 \setlength{\parindent}{0pt}					% 取消全局段落缩进
 \pagenumbering{gobble}						% 取消页码显示
-\setlist[itemize]{nosep                     % 取消 itemize 的默认间距
-    , before={\vspace*{-\parskip}}          % 取消 itemize 和后续段落之间的空白
-    , leftmargin=*}		                    % 取消 itemize 的左边距
+\setlist[itemize]{
+    nosep,                     % 取消 itemize 的默认间距
+    before=\vspace{0pt},       % 取消 itemize 和之前段落之间的空白
+    after=\vspace{0pt},        % 取消 itemize 和后续段落之间的空白
+    leftmargin=*               % 取消 itemize 的左边距
+}
 \setlist[enumerate]{leftmargin=*}	        % 取消 enumerate 的左边距
-\renewcommand{\arraystretch}{1.2}           % 设置表格行间距
-\linespread{1.2}                           % 设置正文行间距
+\renewcommand{\arraystretch}{1.15}           % 设置表格行间距
+\linespread{1.15}                            % 设置正文行间距
 
 \titleformat{\section}					    % 将原标题前面的数字取消了
   {\Large\bfseries\raggedright} 		      % 字体改为 Large，bold，左对齐
@@ -33,11 +36,12 @@
   [{\color{secondary_color}\titlerule}]     % 标题下方加一条线
 \titlespacing*{\section}{0cm}{*1.2}{*1.2}	% 标题左边留白，上方，下方
 
+% 页面大小与页边距，按需求调整
 \usepackage[
 	a4paper,
 	left=1.2cm,
 	right=1.2cm,
-	top=1.5cm,
+	top=1.2cm,
 	bottom=1cm,
 	nohead
 ]{geometry}                                 % 页面边距设置
@@ -55,7 +59,6 @@
 
 \newlength{\iconwidth}
 \setlength{\iconwidth}{1.5em}                   % 设置 section 标题部分图标占用的宽度
-
 %%%%%%%%%%%%%%%%%%%%
 % 文章内容
 %%%%%%%%%%%%%%%%%%%%
